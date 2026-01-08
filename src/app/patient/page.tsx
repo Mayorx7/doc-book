@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/Button";
@@ -12,6 +12,14 @@ import { LoadingSkeleton } from "@/components/LoadingSkeleton";
 import { cn } from "@/lib/utils";
 
 export default function PatientDashboard() {
+  return (
+    <Suspense fallback={<LoadingSkeleton />}>
+      <PatientDashboardContent />
+    </Suspense>
+  );
+}
+
+function PatientDashboardContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const supabase = createClient();

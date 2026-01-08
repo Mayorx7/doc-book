@@ -3,6 +3,7 @@ import { Inter, Outfit } from "next/font/google"; // Using more premium fonts if
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Suspense } from "react";
 
 // Using Outfit for headings and Inter for body - deeper premium feel
 const outfit = Outfit({
@@ -38,7 +39,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
+          <Suspense fallback={<div className="h-20" />}>
+            <Navbar />
+          </Suspense>
           <main className="min-h-screen pt-20">
             {children}
           </main>
